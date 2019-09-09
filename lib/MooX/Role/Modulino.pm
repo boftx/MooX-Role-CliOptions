@@ -138,6 +138,53 @@ Three attributes are provided for the composing package, two of which are
 accepted as command line arguments and the third being created from the final
 C<@ARGV> values after processing by C<Getopt::Long>.
 
+NOTE: Both C<--debug> and C<--verbose> can be disabled by setting the
+environment variable C<MRM_NO_STDOPTS> to a "true" value B<before> composing
+C<MooX::Role::Modulino> into you script. This allows you to completely remove
+them or redefine them to suit your needs if so desired. I.e. you might want
+C<--debug> to be "off" by default. If you decide to redefine them you must
+supply a suitable attribute in your script. This does NOT affect C<--help>
+or C<--man>.
+  
+ #!perl!
+  
+ # redefine --debug to be off by default and --verbose to indicate a level
+ # between 0 and 5
+ BEGIN {
+    $ENV{MRM_NO_STDOPTS} = 1;
+ }
+  
+ has debug => (
+    is => 'ro',
+    default => 0,
+ );
+  
+ has verbose => (
+    is => 'ro',
+    isa => sub {
+        die 'illegal value for --verbose'
+          unless $_[0] >= 0 && $_[0] <= 5;
+    },
+    default => 0,
+ );
+  
+ use Moo;
+ with 'MooX::Role::Modulino';
+  
+ do {
+    my $app = __PACKAGE__->init(
+        argv => \@ARGV,
+        add_opts => [
+            'debug',
+            'verbose=i',
+        ],
+    );
+  
+    exit $app->run;
+ } unless caller();
+  
+ ...
+  
 =head2 debug (Boolean read-only)
 
 Commonly used to either enable extra reports and/or disable potentially
