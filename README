@@ -1,5 +1,8 @@
 MooX-Role-Modulino
 
+This Role was origianlly written to help standardize command line scripts
+at my place of work at the time and to improve testability.
+
 INSTALLATION
 
 To install this module, run the following commands:

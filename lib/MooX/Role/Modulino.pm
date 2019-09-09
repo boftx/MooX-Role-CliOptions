@@ -91,7 +91,10 @@ MooX::Role::Modulino - Wrapper to simplify using Moo with Getopt::Long
 Version 0.01
 
 =head1 SYNOPSIS
+
+This is a minimal script that composes C<MooX::Role::Modulino>.
   
+    #!perl!
     package My::Modulino;
   
     use Moo;
@@ -128,6 +131,11 @@ Version 0.01
     1; # must be present to satisfy "require" when testing
     __END__
   
+=head1 DESCRIPTION
+
+This role was written to help standardize command line script behavior and
+greatly improve their testability.
+
 =head1 EXPORTS
 
 None.
@@ -264,6 +272,10 @@ test that you deem are needed as well as a default.
 
 =back
 
+=head1 SEE ALSO
+
+A fully functional script, C<examples/moodulino.pl>.
+
 =head1 AUTHOR
 
 Jim Bacon, C<< <boftx at cpan.org> >>
@@ -302,8 +314,6 @@ L<https://cpanratings.perl.org/d/MooX-Role-Modulino>
 L<https://metacpan.org/release/MooX-Role-Modulino>
 
 =back
-
-=head1 ACKNOWLEDGEMENTS
 
 =head1 LICENSE AND COPYRIGHT
 
