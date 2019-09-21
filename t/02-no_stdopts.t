@@ -7,7 +7,7 @@ use strict;
 use warnings;
 
 BEGIN {
-    $ENV{MRM_NO_STDOPTS} = 1;
+    $ENV{MRC_NO_STDOPTS} = 1;
 }
 
 use Test::More;

@@ -7,7 +7,7 @@ use strict;
 use warnings;
 
 use Test::More;
-plan tests => 19;
+plan tests => 25;
 
 #plan tests => 1;
 
@@ -27,9 +27,78 @@ lives_ok { $app = __PACKAGE__->init( argv => [] ) }
 isa_ok( $app, __PACKAGE__, '$app' );
 cmp_deeply(
     $app,
-    methods( debug => 1, verbose => 0, argv => [], opt_foo => undef ),
+    methods( debug => 1, verbose => 1, argv => [], opt_foo => undef ),
     'correct defaults were set'
 );
+
+debug_verbose_interactions: {
+    my @cases = (
+        {
+            name   => 'debug and verbose default ON',
+            params => {
+                argv => [],
+            },
+            results => {
+                debug   => 1,
+                verbose => 1,
+            },
+        },
+        {
+            name   => '--debug implies verbose',
+            params => {
+                argv => ['--debug'],
+            },
+            results => {
+                debug   => 1,
+                verbose => 1,
+            },
+        },
+        {
+            name   => '--nodebug implies no verbose',
+            params => {
+                argv => ['--nodebug'],
+            },
+            results => {
+                debug   => 0,
+                verbose => 0,
+            },
+        },
+        {
+            name   => '--noverbose overrides default setting',
+            params => {
+                argv => ['--noverbose'],
+            },
+            results => {
+                verbose => 0,
+            },
+        },
+        {
+            name   => '--verbose sets verbose ON with --nodebug',
+            params => {
+                argv => [ '--verbose', '--nodebug' ],
+            },
+            results => {
+                debug   => 0,
+                verbose => 1,
+            },
+        },
+        {
+            name   => '--noverbose overrides implication by --debug',
+            params => {
+                argv => [ '--noverbose', '--debug' ],
+            },
+            results => {
+                debug   => 1,
+                verbose => 0,
+            },
+        },
+    );
+
+    for (@cases) {
+        $app = __PACKAGE__->init( %{ $_->{params} } );
+        cmp_deeply( $app, methods( %{ $_->{results} } ), $_->{name} );
+    }
+}
 
 {
     my @cases = (
@@ -43,7 +112,7 @@ cmp_deeply(
             results => {
                 argv    => [],
                 debug   => 1,
-                verbose => 0,
+                verbose => 1,
                 opt_foo => undef,
             },
         },
@@ -57,7 +126,7 @@ cmp_deeply(
             results => {
                 argv    => [],
                 debug   => 1,
-                verbose => 0,
+                verbose => 1,
                 opt_foo => undef,
             },
         },
@@ -71,7 +140,7 @@ cmp_deeply(
             results => {
                 argv    => [qw(not options)],
                 debug   => 1,
-                verbose => 0,
+                verbose => 1,
                 opt_foo => undef,
             },
         },
@@ -141,7 +210,7 @@ cmp_deeply(
             results => {
                 argv    => [],
                 debug   => 1,
-                verbose => 0,
+                verbose => 1,
                 opt_foo => 'bar',
             },
         },

@@ -64,7 +64,7 @@ sub BUILD {
 sub run {
     my $self = shift;
 
-    print "running from command line\n"             if $self->cli;
+    print "running from command line\n" if $self->cli;
     print 'custom_opt: ' . $self->custom_opt . "\n" if $self->custom_opt;
 
     print Dumper($self) if $self->debug;

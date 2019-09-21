@@ -21,14 +21,16 @@ isa_ok( $app, 'My::Moodulino', '$app' );
 ok( !$app->cli, 'cli attribute was not set by require' );
 cmp_deeply(
     $app,
-    methods( debug => 1, verbose => 0, argv => [] ),
+    methods( debug => 1, verbose => 1, argv => [] ),
     'correct defaults were set'
 );
 
 lives_ok {
-( $stdout, $stderr, $exit ) = capture {
-    $app->run;
-}; } '$app->run succeeds';
+    ( $stdout, $stderr, $exit ) = capture {
+        $app->run;
+    };
+}
+'$app->run succeeds';
 
 is( $exit >> 8, 0, 'no error in exit code' );
 

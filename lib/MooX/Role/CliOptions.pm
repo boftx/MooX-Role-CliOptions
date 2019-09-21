@@ -9,6 +9,8 @@ use Carp qw( croak );
 use Getopt::Long v2.36 qw(GetOptionsFromArray);
 use Pod::Usage;
 
+# this could have been replaced with hand-rolled "isa" clauses, but if
+# one is using Moo then the odds are good that one already has this
 use Types::Standard qw( ArrayRef Bool );
 
 use Moo::Role;
@@ -26,11 +28,11 @@ do {
     has verbose => (
         is      => 'ro',
         isa     => Bool,
-        default => 0,
+        default => 1,
     );
 
     push( @options, qw( debug! verbose! ) );
-} unless $ENV{MRM_NO_STDOPTS};
+} unless $ENV{MRC_NO_STDOPTS};
 
 has argv => (
     is  => 'ro',
@@ -61,11 +63,11 @@ sub init {
     $values{argv} = $argv;
 
     do {
-        # have verbose follow --debug if not specificed on the cli.
+        # have (no)debug imply verbose if that is not not specificed.
         # This is a # personal preference based on my experience of how
         # these options are most commonly used.
         $values{verbose} //= $values{debug} if defined( $values{debug} );
-    } unless $ENV{MRM_NO_STDOPTS};
+    } unless $ENV{MRC_NO_STDOPTS};
 
     my $app = eval { $class->new(%values); };
     do {
@@ -152,7 +154,7 @@ accepted as command line arguments and the third being created from the final
 C<@ARGV> values after processing by C<Getopt::Long>.
 
 NOTE: Both C<--debug> and C<--verbose> can be disabled by setting the
-environment variable C<MRM_NO_STDOPTS> to a "true" value B<before> composing
+environment variable C<MRC_NO_STDOPTS> to a "true" value B<before> composing
 C<MooX::Role::CliOptions> into you script. This allows you to completely remove
 them or redefine them to suit your needs if so desired. I.e. you might want
 C<--debug> to be "off" by default. If you decide to redefine them you must
@@ -164,7 +166,7 @@ or C<--man>.
  # redefine --debug to be off by default and --verbose to indicate a level
  # between 0 and 5
  BEGIN {
-    $ENV{MRM_NO_STDOPTS} = 1;
+    $ENV{MRC_NO_STDOPTS} = 1;
  }
   
  has debug => (
@@ -205,12 +207,25 @@ dangerous operations such as database modifications.
 
 Default: ON. Is turned off with C<--nodebug> on the command line.
 
+Note: Implies the setting for C<verbose> if C<--verbose> or C<--noverbose> is
+not explicitly set on the command line.
+
 =head2 verbose (Boolean read-only)
 
 Tyically used to add extra information to the output. Often used in
 conjunction with CL--debug>.
 
-Default: OFF. Is turned on with C<--verbose> on the command line.
+Default: Will be the same as C<debug> if not explicitly set with either
+C<--verbose> or C<--noverbose>. This behaviour was chosen since that is
+the most common usage in the author's experience.
+
+The most likely patter would be
+  
+ # in a crontab where no visible output would be desired
+ /my_script --nodebug
+  
+ # manually run from the cli if screen output is desired
+ /my_script --nodebug --verbose
 
 =head2 argv (read-only)
 
@@ -251,13 +266,15 @@ will be left in C<@ARGV>. They can also be accessed via C<$app-E<gt>argv>.
 
 =item add_opts (optional)
 
-You can add your own commandline options by using this. Simply place the
+You can add your own command line options by using this. Simply place the
 specifications for any additional options that you want in an array ref as
 shown below and be sure to declare an attribute to hold the option data
 as processed by C<Getopt::Long>. (See the example script to make things clear.)
   
  # in your script
  has custom1 => (
+    is => 'ro',
+    isa => sub { ... },
  );
   
  do {
@@ -279,7 +296,7 @@ test that you deem are needed as well as a default.
 
 =head1 SEE ALSO
 
-A fully functional script, C<examples/moodulino.pl>.
+C<examples/moodulino.pl> for a fully functional script,
 
 =head1 AUTHOR
 
