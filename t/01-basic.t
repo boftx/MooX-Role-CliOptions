@@ -85,7 +85,7 @@ cmp_deeply(
             results => {
                 argv    => [],
                 debug   => 1,
-                verbose => 0,
+                verbose => 1,
                 opt_foo => undef,
             },
         },

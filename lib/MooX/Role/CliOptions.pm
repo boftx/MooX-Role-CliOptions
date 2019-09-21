@@ -60,6 +60,13 @@ sub init {
 
     $values{argv} = $argv;
 
+    do {
+        # have verbose follow --debug if not specificed on the cli.
+        # This is a # personal preference based on my experience of how
+        # these options are most commonly used.
+        $values{verbose} //= $values{debug} if defined( $values{debug} );
+    } unless $ENV{MRM_NO_STDOPTS};
+
     my $app = eval { $class->new(%values); };
     do {
         print $@ . "\n";
