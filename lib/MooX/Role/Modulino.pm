@@ -15,7 +15,7 @@ use Moo::Role;
 
 our $VERSION = '0.01';
 
-my @options = ( 'help', 'man', );
+my @options = ( 'help', 'man' );
 do {
     has debug => (
         is      => 'ro',
@@ -51,11 +51,9 @@ sub init {
 
     croak q{unknown argument supplied for 'init'} if keys(%args);
 
-    my %values = ();
-    my $debug;
-
     push( @options, $_ ) for ( @{$add_opts} );
 
+    my %values;
     GetOptionsFromArray( $argv, \%values, @options ) or _pod2usage(2);
     _pod2usage(1) if $values{help};
     _pod2usage( -exitstatus => 0, -verbose => 2 ) if $values{man};
