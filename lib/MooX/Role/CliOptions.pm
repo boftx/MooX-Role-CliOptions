@@ -15,7 +15,7 @@ use Types::Standard qw( ArrayRef Bool );
 
 use Moo::Role;
 
-our $VERSION = '0.01';
+our $VERSION = '0.02';
 
 my @options = ( 'help', 'man' );
 do {
@@ -66,7 +66,8 @@ sub init {
         # have (no)debug imply verbose if that is not not specificed.
         # This is a # personal preference based on my experience of how
         # these options are most commonly used.
-        $values{verbose} //= $values{debug} if defined( $values{debug} );
+        $values{verbose} ||= $values{debug}
+          if defined( $values{debug} ) && !defined( $values{verbose} );
     } unless $ENV{MRC_NO_STDOPTS};
 
     my $app = eval { $class->new(%values); };
@@ -304,7 +305,7 @@ Jim Bacon, C<< <boftx at cpan.org> >>
 
 =head1 BUGS
 
-Please report any bugs or feature requests to C<bug-moox-role-modulino at rt.cpan.org>, or through
+Please report any bugs or feature requests to C<bug-moox-role-clioptions at rt.cpan.org>, or through
 the web interface at L<https://rt.cpan.org/NoAuth/ReportBug.html?Queue=MooX-Role-CliOptions>.  I will be notified, and then you'll
 automatically be notified of progress on your bug as I make changes.
 
