@@ -4,10 +4,10 @@ use warnings;
 use ExtUtils::MakeMaker;
 
 WriteMakefile(
-    NAME             => 'MooX::Role::Modulino',
+    NAME             => 'MooX::Role::CliOptions',
     AUTHOR           => q{Jim Bacon <boftx@cpan.org>},
-    VERSION_FROM     => 'lib/MooX/Role/Modulino.pm',
-    ABSTRACT_FROM    => 'lib/MooX/Role/Modulino.pm',
+    VERSION_FROM     => 'lib/MooX/Role/CliOptions.pm',
+    ABSTRACT_FROM    => 'lib/MooX/Role/CliOptions.pm',
     LICENSE          => 'artistic_2',
     PL_FILES         => {},
     MIN_PERL_VERSION => '5.006',
@@ -31,5 +31,5 @@ WriteMakefile(
         'Types::Standard' => 0,
     },
     dist  => { COMPRESS => 'gzip -9f', SUFFIX => 'gz', },
-    clean => { FILES => 'MooX-Role-Modulino-*' },
+    clean => { FILES => 'MooX-Role-CliOptions-*' },
 );

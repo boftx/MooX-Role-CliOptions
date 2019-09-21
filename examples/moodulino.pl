@@ -9,7 +9,7 @@ use Data::Dumper;
 $Data::Dumper::Indent = 1;
 
 use Moo;
-with 'MooX::Role::Modulino';
+with 'MooX::Role::CliOptions';
 
 use MooX::StrictConstructor;
 
@@ -79,7 +79,7 @@ __END__
 
 =head1 NAME
  
-moodulino - eample showing how to use MooX::Role::Modulino
+moodulino - eample showing how to use MooX::Role::CliOptions
  
 =head1 SYNOPSIS
  
@@ -107,7 +107,7 @@ Prints the manual page and exits.
  
 =head1 DESCRIPTION
  
-This script demonstrates how to use C<MooX::Role::Modulino>. With no
+This script demonstrates how to use C<MooX::Role::CliOptions>. With no
 options will print a message and the contents of C<custom_opt>, if any.
  
 =head1 AUTHOR

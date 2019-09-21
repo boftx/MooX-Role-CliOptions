@@ -50,7 +50,7 @@ TODO: {
     "placeholder date/time"       => qr(Date/time)
   );
 
-  module_boilerplate_ok('lib/MooX/Role/Modulino.pm');
+  module_boilerplate_ok('lib/MooX/Role/CliOptions.pm');
 
 
 }

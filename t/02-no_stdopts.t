@@ -21,7 +21,7 @@ use Test::MockModule;
 use Capture::Tiny qw( capture_merged );
 
 use Moo;
-with 'MooX::Role::Modulino';
+with 'MooX::Role::CliOptions';
 
 use MooX::StrictConstructor;
 
@@ -98,7 +98,7 @@ cmp_deeply(
 
 {
     my $p2u_called;
-    my $mock_MRM = Test::MockModule->new('MooX::Role::Modulino');
+    my $mock_MRM = Test::MockModule->new('MooX::Role::CliOptions');
     $mock_MRM->mock(
         _pod2usage => sub {
             $p2u_called = 1;

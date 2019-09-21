@@ -1,4 +1,4 @@
-package MooX::Role::Modulino;
+package MooX::Role::CliOptions;
 
 use 5.006;
 use strict;
@@ -75,14 +75,14 @@ sub _pod2usage {
     pod2usage(@_);
 }
 
-1;    # End of MooX::Role::Modulino
+1;    # End of MooX::Role::CliOptions
 __END__
 
 =pod
 
 =head1 NAME
 
-MooX::Role::Modulino - Wrapper to simplify using Moo with Getopt::Long
+MooX::Role::CliOptions - Wrapper to simplify using Moo with Getopt::Long
 
 =head1 VERSION
 
@@ -90,13 +90,13 @@ Version 0.01
 
 =head1 SYNOPSIS
 
-This is a minimal script that composes C<MooX::Role::Modulino>.
+This is a minimal script that composes C<MooX::Role::CliOptions>.
   
     #!perl!
-    package My::Modulino;
+    package My::CliOptions;
   
     use Moo;
-    with 'MooX::Role::Modulino';
+    with 'MooX::Role::CliOptions';
   
     # initialize script attributes/variables
     has option1 => (
@@ -146,7 +146,7 @@ C<@ARGV> values after processing by C<Getopt::Long>.
 
 NOTE: Both C<--debug> and C<--verbose> can be disabled by setting the
 environment variable C<MRM_NO_STDOPTS> to a "true" value B<before> composing
-C<MooX::Role::Modulino> into you script. This allows you to completely remove
+C<MooX::Role::CliOptions> into you script. This allows you to completely remove
 them or redefine them to suit your needs if so desired. I.e. you might want
 C<--debug> to be "off" by default. If you decide to redefine them you must
 supply a suitable attribute in your script. This does NOT affect C<--help>
@@ -175,7 +175,7 @@ or C<--man>.
  );
   
  use Moo;
- with 'MooX::Role::Modulino';
+ with 'MooX::Role::CliOptions';
   
  do {
     my $app = __PACKAGE__->init(
@@ -281,14 +281,14 @@ Jim Bacon, C<< <boftx at cpan.org> >>
 =head1 BUGS
 
 Please report any bugs or feature requests to C<bug-moox-role-modulino at rt.cpan.org>, or through
-the web interface at L<https://rt.cpan.org/NoAuth/ReportBug.html?Queue=MooX-Role-Modulino>.  I will be notified, and then you'll
+the web interface at L<https://rt.cpan.org/NoAuth/ReportBug.html?Queue=MooX-Role-CliOptions>.  I will be notified, and then you'll
 automatically be notified of progress on your bug as I make changes.
 
 =head1 SUPPORT
 
 You can find documentation for this module with the perldoc command.
 
-    perldoc MooX::Role::Modulino
+    perldoc MooX::Role::CliOptions
 
 
 You can also look for information at:
@@ -297,19 +297,19 @@ You can also look for information at:
 
 =item * RT: CPAN's request tracker (report bugs here)
 
-L<https://rt.cpan.org/NoAuth/Bugs.html?Dist=MooX-Role-Modulino>
+L<https://rt.cpan.org/NoAuth/Bugs.html?Dist=MooX-Role-CliOptions>
 
 =item * AnnoCPAN: Annotated CPAN documentation
 
-L<http://annocpan.org/dist/MooX-Role-Modulino>
+L<http://annocpan.org/dist/MooX-Role-CliOptions>
 
 =item * CPAN Ratings
 
-L<https://cpanratings.perl.org/d/MooX-Role-Modulino>
+L<https://cpanratings.perl.org/d/MooX-Role-CliOptions>
 
 =item * Search CPAN
 
-L<https://metacpan.org/release/MooX-Role-Modulino>
+L<https://metacpan.org/release/MooX-Role-CliOptions>
 
 =back
 

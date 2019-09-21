@@ -7,10 +7,10 @@ use Test::More;
 plan tests => 1;
 
 BEGIN {
-    require_ok('MooX::Role::Modulino') || print "Bail out!\n";
+    require_ok('MooX::Role::CliOptions') || print "Bail out!\n";
 }
 
-diag("Testing MooX::Role::Modulino $MooX::Role::Modulino::VERSION, Perl $], $^X"
+diag("Testing MooX::Role::CliOptions $MooX::Role::CliOptions::VERSION, Perl $], $^X"
 );
 
 exit;

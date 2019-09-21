@@ -1,4 +1,4 @@
-MooX-Role-Modulino
+MooX-Role-CliOptions
 
 This Role was origianlly written to help standardize command line scripts
 at my place of work at the time and to improve testability.
@@ -17,21 +17,21 @@ SUPPORT AND DOCUMENTATION
 After installing, you can find documentation for this module with the
 perldoc command.
 
-    perldoc MooX::Role::Modulino
+    perldoc MooX::Role::CliOptions
 
 You can also look for information at:
 
     RT, CPAN's request tracker (report bugs here)
-        https://rt.cpan.org/NoAuth/Bugs.html?Dist=MooX-Role-Modulino
+        https://rt.cpan.org/NoAuth/Bugs.html?Dist=MooX-Role-CliOptions
 
     AnnoCPAN, Annotated CPAN documentation
-        http://annocpan.org/dist/MooX-Role-Modulino
+        http://annocpan.org/dist/MooX-Role-CliOptions
 
     CPAN Ratings
-        https://cpanratings.perl.org/d/MooX-Role-Modulino
+        https://cpanratings.perl.org/d/MooX-Role-CliOptions
 
     Search CPAN
-        https://metacpan.org/release/MooX-Role-Modulino
+        https://metacpan.org/release/MooX-Role-CliOptions
 
 
 LICENSE AND COPYRIGHT

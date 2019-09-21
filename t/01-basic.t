@@ -15,7 +15,7 @@ use Test::Exception;
 use Test::Deep;
 
 use Moo;
-with 'MooX::Role::Modulino';
+with 'MooX::Role::CliOptions';
 
 use MooX::StrictConstructor;
 
