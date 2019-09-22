@@ -15,7 +15,7 @@ use Types::Standard qw( ArrayRef Bool );
 
 use Moo::Role;
 
-our $VERSION = '0.03';
+our $VERSION = '0.03.1_001';
 
 my @options = ( 'help', 'man' );
 do {
@@ -96,7 +96,7 @@ MooX::Role::CliOptions - Wrapper to simplify using Moo with Getopt::Long
 
 =head1 VERSION
 
-Version 0.03
+Version 0.03.1_001
 
 =head1 SYNOPSIS
 

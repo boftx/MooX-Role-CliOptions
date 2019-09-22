@@ -18,6 +18,7 @@ WriteMakefile(
         'Test::More'              => '0',
         'Test::Exception'         => '0',
         'Test::Deep'              => '0',
+        'Test::MockModule'        => '0',
         'Capture::Tiny'           => 0,
         'Moo'                     => 0,
         'MooX::StrictConstructor' => 0,

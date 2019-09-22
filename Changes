@@ -1,5 +1,9 @@
 Revision history for MooX-Role-CliOptions
 
+0.03.1_001 2019-09-21 20:13:00
+        Added Test::MockModule to build requirements. Investigating test
+        failures with system() on some platforms.
+
 0.03    2019-09-21 16:53:00
         Corrected version number in POD.
 
