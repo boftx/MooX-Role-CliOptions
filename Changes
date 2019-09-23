@@ -1,5 +1,11 @@
 Revision history for MooX-Role-CliOptions
 
+0.04.1_003 2019-09-23 11:11:00
+        Set plan to 'skip_all' if it appears that the spawned child process
+        fails to run the example script properly. This appears to happen on
+        several test platforms even though required modules are specified in
+        Makefile.PL.
+
 0.04.1_002 2019-09-22 23:45:00
         Added TEST_REQUIRES to Makefile.PL after see test failures indicating
         that Moo was not available.

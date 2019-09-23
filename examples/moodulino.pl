@@ -50,16 +50,10 @@ do {
     exit $app->run;
 } unless caller();
 
+# executable code like this should not be used in actual scripts, this
+# is only here to provide data for the tests.
 print "command line flag not set\n" if !$cli;
 print "exit was not called\n";
-
-# this is present to help troubleshoot why the 03 test is failing on some
-# platforms but not on others. it will be removed once that is known.
-my $i = 0;
-while ( my @call_info = caller($i) ) {
-    warn "Call frame $i: " . Dumper( \@call_info );
-    last if $i++ > 15;
-}
 
 # BUILD will be called like normal if present as part of 'init', shown
 # here for illustration purposes only.
