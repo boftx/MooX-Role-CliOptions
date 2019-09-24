@@ -5,8 +5,6 @@ use warnings;
 
 use Test::More;
 
-#plan tests => 4;
-
 use Capture::Tiny ':all';
 
 use FindBin;
