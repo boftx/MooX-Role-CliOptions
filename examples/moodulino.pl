@@ -107,6 +107,11 @@ Prints the manual page and exits.
 This script demonstrates how to use C<MooX::Role::CliOptions>. With no
 options will print a message and the contents of C<custom_opt>, if any.
  
+=head1 SEE ALSO
+
+C<examples/myscript.pl> in this distribution for a normal script using
+C<MooX::Role::CliOptions> in the C<main> namespace.
+
 =head1 AUTHOR
 
 Jim Bacon, C<< <boftx at cpan.org> >>
