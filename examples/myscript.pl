@@ -1,7 +1,5 @@
 #!/usr/bin/perl
 
-package My::Moodulino;
-
 use strict;
 use warnings;
 
@@ -13,48 +11,23 @@ with 'MooX::Role::CliOptions';
 
 use MooX::StrictConstructor;
 
-my $cli = 0;
-
-has custom_opt => ( is => 'ro', );
+has custom_opt => ( is => 'ro' );
 
 has internal_attr => (
     is       => 'rw',
     init_arg => undef,
 );
 
-has cli => (
-    is       => 'lazy',
-    init_arg => undef,
-    default  => sub { return $cli; },
+my $app = __PACKAGE__->init(
+    argv     => \@ARGV,
+    add_opts => ['custom_opt=s'],
 );
-
-# all attributes and package variable MUST be declared before this!
-do {
-    print "caller-stack is empty\n";
-
-    # set this so test scripts can see it in the attribute
-    $cli = 1;
-
-    my $app = __PACKAGE__->init(
-        argv     => \@ARGV,
-        add_opts => ['custom_opt=s'],
-    );
-
-    exit $app->run;
-} unless caller();
-
-# executable code like this should not be used in actual scripts, this
-# is only here to provide data for the tests.
-print "command line flag not set\n" if !$cli;
-print "exit was not called\n";
+exit $app->run;
 
 # BUILD will be called like normal if present as part of 'init', shown
 # here for illustration purposes only.
 sub BUILD {
     my $self = shift;
-
-    # this will trigger the lazy default
-    print "running from command line\n" if $self->cli && $self->verbose;
 
     return;
 }
@@ -62,8 +35,9 @@ sub BUILD {
 sub run {
     my $self = shift;
 
-    printf( "custom_opt: %s\n", $self->custom_opt ) if $self->custom_opt;
+    $self->internal_attr('foobar') if !$self->debug;
 
+    print 'custom_opt: ' . $self->custom_opt . "\n" if $self->custom_opt;
     print Dumper($self) if $self->debug;
 
     return 0;
@@ -76,11 +50,11 @@ __END__
 
 =head1 NAME
  
-moodulino.pl - eample showing how to use MooX::Role::CliOptions
+myscript.pl - eample showing how to use MooX::Role::CliOptions
  
 =head1 SYNOPSIS
  
-moodulino.pl [options]
+myscript.pl [options]
  
  Options:
    --debug    add diagnostic messages and/or disable database writes
@@ -109,8 +83,8 @@ options will print a message and the contents of C<custom_opt>, if any.
  
 =head1 SEE ALSO
 
-C<examples/myscript.pl> in this distribution for a normal script using
-C<MooX::Role::CliOptions> in the C<main> namespace.
+C<examples/moodulino.pl> in this distribution for a script using
+C<MooX::Role::CliOptions> as a modulino.
 
 =head1 AUTHOR
 
