@@ -7,7 +7,7 @@ use strict;
 use warnings;
 
 use Test::More;
-plan tests => 25;
+plan tests => 32;
 
 #plan tests => 1;
 
@@ -220,6 +220,74 @@ debug_verbose_interactions: {
         lives_ok { $app = __PACKAGE__->init( %{ $_->{params} } ); }
         $_->{name};
         cmp_deeply( $app, methods( %{ $_->{results} } ), $_->{name2} );
+    }
+}
+
+bad_init_params: {
+    my @cases = (
+        {
+            name   => 'undef argv param is rejected',
+            params => {
+                argv     => undef,
+                add_opts => undef,
+            },
+            error => qr/'argv' argument is required/,
+        },
+        {
+            name   => 'non-ref argv param is rejected',
+            params => {
+                argv     => 'foobar',
+                add_opts => undef,
+            },
+            error => qr/'argv' must be an array reference/,
+        },
+        {
+            name   => 'non-array argv param is rejected',
+            params => {
+                argv     => {},
+                add_opts => undef,
+            },
+            error => qr/'argv' must be an array reference/,
+        },
+        {
+            name   => 'missing argv param is rejected',
+            params => {
+                add_opts => undef,
+            },
+            error => qr/'argv' argument is required/,
+        },
+        {
+            name   => 'non-ref add_opts param is rejected',
+            params => {
+                argv     => [],
+                add_opts => 'foobar',
+            },
+            error => qr/'add_opts' must be an array reference/,
+        },
+        {
+            name   => 'non-array add_opts param is rejected',
+            params => {
+                argv     => [],
+                add_opts => {},
+            },
+            error => qr/'add_opts' must be an array reference/,
+        },
+        {
+            name   => 'unknown param is rejected',
+            params => {
+                argv     => [],
+                add_opts => [],
+                foobar => undef,
+            },
+            error => qr/unknown argument supplied for 'init'/,
+        },
+    );
+
+    for (@cases) {
+        throws_ok { $app = __PACKAGE__->init( %{ $_->{params} } ); }
+        $_->{error},
+        # qr/'argv' argument is required/,
+        $_->{name};
     }
 }
 

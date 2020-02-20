@@ -15,7 +15,7 @@ use Types::Standard qw( ArrayRef Bool );
 
 use Moo::Role;
 
-our $VERSION = '0.05';
+our $VERSION = '0.06';
 
 my @options = ( 'help', 'man' );
 do {
@@ -44,7 +44,7 @@ sub init {
     my %args  = @_;
 
     my $argv = delete( $args{argv} ) or croak q{'argv' argument is required};
-    croak q{'argv' must be an array reference'}
+    croak q{'argv' must be an array reference}
       unless ref($argv) && ref($argv) eq 'ARRAY';
 
     my $add_opts = delete( $args{add_opts} ) || [];
@@ -96,7 +96,7 @@ MooX::Role::CliOptions - Wrapper to simplify using Moo with Getopt::Long
 
 =head1 VERSION
 
-Version 0.05
+Version 0.06
 
 =head1 SYNOPSIS
 
